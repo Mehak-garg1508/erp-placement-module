@@ -402,7 +402,7 @@ const StudentProfile = () => {
                 )}
                 {student.resumeUrl && (
                   <a
-                    href={`http://localhost:5000${student.resumeUrl}`}
+                    href={`${import.meta.env.VITE_API_URL || "http://localhost:5000"}${student.resumeUrl}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-2 text-green-600 hover:underline"
