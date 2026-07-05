@@ -23,6 +23,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://erp-placement-module-gcybof9rx-mehak-garg1508s-projects.vercel.app",
   "https://erp-placement-module-f8310hdx8-mehak-garg1508s-projects.vercel.app",
+  "https://erp-placement-module-git-main-mehak-garg1508s-projects.vercel.app",
 ];
 
 const corsOptions = {
