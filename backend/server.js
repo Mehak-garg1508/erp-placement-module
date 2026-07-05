@@ -62,7 +62,6 @@ connectDB();
 const app = express();
 app.set("trust proxy", 1);
 
-
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
 }
@@ -74,30 +73,32 @@ app.use(helmet()); // Security headers set karta hai
 app.use(mongoSanitize());
 
 // Rate Limiting - API abuse rokna (Only in Production)
-const limiter = process.env.NODE_ENV === "production"
-  ? rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // Har IP 15 min me max 100 requests
-      message: "Too many requests, please try again later",
-    })
-  : (req, res, next) => next();
+const limiter =
+  process.env.NODE_ENV === "production"
+    ? rateLimit({
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        max: 100, // Har IP 15 min me max 100 requests
+        message: "Too many requests, please try again later",
+      })
+    : (req, res, next) => next();
 app.use("/api", limiter);
 
 // Login pe strict limit (brute force attack rokna - Only in Production)
-const loginLimiter = process.env.NODE_ENV === "production"
-  ? rateLimit({
-      windowMs: 15 * 60 * 1000,
-      max: 5, // Max 5 login attempts
-      message: "Too many login attempts, try again after 15 minutes",
-    })
-  : (req, res, next) => next();
+const loginLimiter =
+  process.env.NODE_ENV === "production"
+    ? rateLimit({
+        windowMs: 15 * 60 * 1000,
+        max: 5, // Max 5 login attempts
+        message: "Too many login attempts, try again after 15 minutes",
+      })
+    : (req, res, next) => next();
 app.use("/api/auth/login", loginLimiter);
 // ──────────────────────────────────────────────
 
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.FRONTEND_URL,
+  "https://erp-placement-module-f8310hdx8-mehak-garg1508s-projects.vercel.app",
 ].filter(Boolean);
 
 app.use(
@@ -114,7 +115,7 @@ app.use(
       }
     },
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
