@@ -1,7 +1,23 @@
 import axios from "axios";
 
+const resolveApiBaseUrl = () => {
+  const configuredUrl = import.meta.env.VITE_API_URL?.trim();
+
+  if (configuredUrl && configuredUrl !== "http://localhost:5000") {
+    return configuredUrl.endsWith("/api")
+      ? configuredUrl
+      : `${configuredUrl}/api`;
+  }
+
+  if (import.meta.env.PROD) {
+    return "/api";
+  }
+
+  return "http://localhost:5000/api";
+};
+
 const API = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api`,
+  baseURL: resolveApiBaseUrl(),
   withCredentials: true,
 });
 
@@ -18,9 +34,11 @@ API.interceptors.request.use((config) => {
 API.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      if (!window.location.pathname.includes("/login")) {
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   },

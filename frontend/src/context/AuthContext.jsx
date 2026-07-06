@@ -20,8 +20,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await getMeAPI();
       setUser(data.user);
-    } catch {
-      localStorage.removeItem("token");
+    } catch (error) {
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        localStorage.removeItem("token");
+        setUser(null);
+      }
     } finally {
       setLoading(false);
     }
