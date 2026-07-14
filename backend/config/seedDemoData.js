@@ -57,7 +57,8 @@ const seedDemoData = async () => {
     name: "Google",
     industry: "IT",
     website: "https://google.com",
-    description: "Global technology company focused on internet services and products.",
+    description:
+      "Global technology company focused on internet services and products.",
     contactPerson: {
       name: "Alice HR",
       email: "alice@google.com",
@@ -97,7 +98,12 @@ const seedDemoData = async () => {
     skills: ["JavaScript", "Node.js", "React", "Data Structures"],
     applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
     driveDate: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
-    selectionProcess: ["Resume Screening", "Coding Test", "Technical Interview", "HR Interview"],
+    selectionProcess: [
+      "Resume Screening",
+      "Coding Test",
+      "Technical Interview",
+      "HR Interview",
+    ],
     status: "open",
     totalPositions: 5,
     postedBy: officerUser._id,
@@ -111,7 +117,11 @@ const seedDemoData = async () => {
     location: "Hyderabad, India",
     package: { min: 18, max: 28 },
     eligibility: {
-      departments: ["Computer Science", "Information Technology", "Electronics"],
+      departments: [
+        "Computer Science",
+        "Information Technology",
+        "Electronics",
+      ],
       minCGPA: 7.5,
       maxBacklogs: 0,
       batch: "2024",
@@ -119,7 +129,11 @@ const seedDemoData = async () => {
     skills: ["C#", "Azure", "Distributed Systems", "SQL"],
     applicationDeadline: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
     driveDate: new Date(Date.now() + 18 * 24 * 60 * 60 * 1000),
-    selectionProcess: ["Online Assessment", "Technical Interview", "HR Interview"],
+    selectionProcess: [
+      "Online Assessment",
+      "Technical Interview",
+      "HR Interview",
+    ],
     status: "open",
     totalPositions: 4,
     postedBy: officerUser._id,
