@@ -119,10 +119,16 @@ const helmet = require("helmet"); // ← NEW
 const rateLimit = require("express-rate-limit"); // ← NEW
 const mongoSanitize = require("express-mongo-sanitize"); // ← NEW
 const connectDB = require("./config/db");
+const seedDemoData = require("./config/seedDemoData");
 const fs = require("fs");
 
 dotenv.config();
-connectDB();
+connectDB()
+  .then(() => seedDemoData())
+  .catch((error) => {
+    console.error("Startup error:", error);
+    process.exit(1);
+  });
 
 const app = express();
 app.set("trust proxy", 1);
