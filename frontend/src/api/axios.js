@@ -3,10 +3,9 @@ import axios from "axios";
 const resolveApiBaseUrl = () => {
   const configuredUrl = import.meta.env.VITE_API_URL?.trim();
 
-  if (configuredUrl && configuredUrl !== "http://localhost:5000") {
-    return configuredUrl.endsWith("/api")
-      ? configuredUrl
-      : `${configuredUrl}/api`;
+  if (configuredUrl) {
+    const trimmedUrl = configuredUrl.replace(/\/+$/, "");
+    return trimmedUrl.endsWith("/api") ? trimmedUrl : `${trimmedUrl}/api`;
   }
 
   if (import.meta.env.PROD) {

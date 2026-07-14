@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
   const login = (userData, token) => {
     localStorage.setItem("token", token);
     setUser(userData);
+    setLoading(false);
   };
 
   const logout = () => {
